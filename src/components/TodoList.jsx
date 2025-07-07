@@ -208,6 +208,7 @@ export default function TodoList() {
           style={{
             maxHeight: "80vh",
             overflow: "scroll",
+            overflowX: "hidden"
           }}
         >
           <CardContent>
