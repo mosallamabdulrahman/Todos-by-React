@@ -1,8 +1,8 @@
 import "./App.css";
 import TodoList from "./components/TodoList";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { TodosContext } from "./contexts/todosContext";
-import { useState } from "react";
+import { TodosContextProvider } from "./contexts/todosContext";
+
 
 import { ToastProvider } from "./contexts/ToastContext";
 const theme = createTheme({
@@ -19,11 +19,6 @@ const theme = createTheme({
 
 
 function App() {
-  const [todos, setTodos] = useState(() => {
-	const storedTodos = JSON.parse(localStorage.getItem("todos"));
-  return storedTodos ?? [];
-  });
-
   return (
     <ThemeProvider theme={theme}>
       <ToastProvider>
@@ -38,9 +33,9 @@ function App() {
             direction: "rtl",
           }}
         >
-          <TodosContext.Provider value={{ todos, setTodos }}>
+          <TodosContextProvider>
             <TodoList />
-          </TodosContext.Provider>
+          </TodosContextProvider>
         </div>
       </ToastProvider>
     </ThemeProvider>

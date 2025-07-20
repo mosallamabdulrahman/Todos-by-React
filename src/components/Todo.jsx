@@ -27,7 +27,6 @@ export default function Todo({ todo, showDelete, showUpdate }) {
       return t;
     });
     setTodos(updatedTodos);
-    localStorage.setItem("todos", JSON.stringify(updatedTodos));
     showHideToast("تم التعديل بنجاح");
   }
 

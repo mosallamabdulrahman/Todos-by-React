@@ -22,7 +22,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 // OTHERS
 import { TodosContext } from "../contexts/todosContext";
 import { useToast } from "../contexts/ToastContext";
-import { useContext, useState, useEffect, useMemo } from "react";
+import { useContext, useState, useMemo } from "react";
 
 export default function TodoList() {
   const { todos, setTodos } = useContext(TodosContext);
@@ -53,11 +53,6 @@ export default function TodoList() {
     todosToBeRendered = todos;
   }
 
-  useEffect(() => {
-    const storageTodos = JSON.parse(localStorage.getItem("todos")) ?? [];
-    setTodos(storageTodos);
-  }, []);
-
   // ===== HANDLERS =====
   function changeDisplayedType(e) {
     setDisplayedTodosType(e.target.value);
@@ -72,7 +67,6 @@ export default function TodoList() {
     };
     const updatedTodos = [...todos, newTodo];
     setTodos(updatedTodos);
-    localStorage.setItem("todos", JSON.stringify(updatedTodos));
     setTitleInput("");
     showHideToast("تمت الإضافة بنجاح");
   }
@@ -95,7 +89,6 @@ export default function TodoList() {
     const updatedTodos = todos.filter((t) => t.id !== dialogTodo.id);
     setTodos(updatedTodos);
     setShowDeleteDialog(false);
-    localStorage.setItem("todos", JSON.stringify(updatedTodos));
     showHideToast("تم الحذف بنجاح");
   }
 
@@ -111,7 +104,6 @@ export default function TodoList() {
     );
     setTodos(updatedTodos);
     setShowUpdateDialog(false);
-    localStorage.setItem("todos", JSON.stringify(updatedTodos));
     showHideToast("تم التحديث بنجاح");
   }
 
